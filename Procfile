@@ -1,1 +1,1 @@
-"web: grouptext"
+web: grouptext
