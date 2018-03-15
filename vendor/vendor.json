@@ -99,6 +99,12 @@
 			"revisionTime": "2018-02-18T09:36:01Z"
 		},
 		{
+			"checksumSHA1": "8TT0gfbt29q/yplUEVQ3nbEKm9c=",
+			"path": "github.com/sfreiberg/gotwilio",
+			"revision": "a0d4e5000ed679a67a69d2f92b62d06320bc5d09",
+			"revisionTime": "2018-03-01T16:52:38Z"
+		},
+		{
 			"checksumSHA1": "z1jqX/kf16YO8Rd7bCtY+p4+TEs=",
 			"path": "github.com/ugorji/go/codec",
 			"revision": "02537d3a3e32ef636a53519265d211bd208ca488",
