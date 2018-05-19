@@ -93,6 +93,12 @@
 			"revisionTime": "2017-11-07T05:05:31Z"
 		},
 		{
+			"checksumSHA1": "Zg4Y5ocRuAJDhFaObAzREgIpkBg=",
+			"path": "github.com/mikeflynn/go-alexa/skillserver",
+			"revision": "cb115322184087e6d0c2b6f84ccc20284cc6540d",
+			"revisionTime": "2018-03-24T05:09:28Z"
+		},
+		{
 			"checksumSHA1": "OnCHuYYPIZycyCb0gQ8Ua+Blp3U=",
 			"path": "github.com/russross/blackfriday",
 			"revision": "55d61fa8aa702f59229e6cff85793c22e580eaf5",
