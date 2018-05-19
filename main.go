@@ -68,7 +68,7 @@ var Applications = map[string]interface{}{
 		OnIntent: EchoIntentHandler,
 		OnLaunch: EchoIntentHandler,
 	},
-	"/echo": alexa.EchoApplication{ // Route
+	"/echo/": alexa.EchoApplication{ // Route
 		AppID:    "amzn1.ask.skill.36681e9c-17d6-4051-8f12-30ba2328e619", // Echo App ID from Amazon Dashboard
 		OnIntent: EchoIntentHandler,
 		OnLaunch: EchoIntentHandler,
