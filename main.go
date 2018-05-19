@@ -1,12 +1,14 @@
 package main
 
-import (
+/*import (
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/russross/blackfriday"
+
+	alexa "github.com/mikeflynn/go-alexa/skillserver"
 )
 
 func main() {
@@ -41,4 +43,34 @@ func main() {
 	router.GET("/contact/:id", handleContact)
 
 	router.Run(":" + port)
+}*/
+import (
+	"os"
+
+	alexa "github.com/mikeflynn/go-alexa/skillserver"
+)
+
+func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+		//log.Fatal("$PORT must be set")
+	}
+	alexa.Run(Applications, port)
+}
+func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse) {
+	echoResp.OutputSpeech("Hello world from my new Echo test app!").Card("Hello World", "This is a test card.")
+}
+
+var Applications = map[string]interface{}{
+	"/echo/helloworld": alexa.EchoApplication{ // Route
+		AppID:    "amzn1.ask.skill.36681e9c-17d6-4051-8f12-30ba2328e619", // Echo App ID from Amazon Dashboard
+		OnIntent: EchoIntentHandler,
+		OnLaunch: EchoIntentHandler,
+	},
+	"/echo": alexa.EchoApplication{ // Route
+		AppID:    "amzn1.ask.skill.36681e9c-17d6-4051-8f12-30ba2328e619", // Echo App ID from Amazon Dashboard
+		OnIntent: EchoIntentHandler,
+		OnLaunch: EchoIntentHandler,
+	},
 }
