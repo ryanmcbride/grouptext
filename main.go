@@ -59,7 +59,7 @@ func main() {
 	alexa.Run(Applications, port)
 }
 func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse) {
-	echoResp.OutputSpeech("Hello world from my new Echo test app!").Card("Hello World", "This is a test card.")
+	echoResp.OutputSpeech("Why is Connor super cool!").Card("Hello World", "This is a test card.")
 }
 
 var Applications = map[string]interface{}{
