@@ -72,6 +72,11 @@ func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse)
 		return
 	}
 	if echoReq.Request.Intent.Name == "spending" {
+		if len(echoReq.Request.Intent.Slots) > 0 {
+			echoReq.Request.Intent.Slots[0].Value
+			echoResp.OutputSpeech("spending request name "+echoReq.Request.Intent.Slots[0].name+" and value "+echoReq.Request.Intent.Slots[0].Value).Card("Hello World", "spending")
+			return
+		}
 		echoResp.OutputSpeech("spending request").Card("Hello World", "spending")
 		return
 	}
