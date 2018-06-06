@@ -59,7 +59,7 @@ func main() {
 	alexa.Run(Applications, port)
 }
 func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse) {
-	if echoReq.Request.Intent == "balance" {
+	if echoReq.Request.Intent.Name == "balance" {
 		echoResp.OutputSpeech("Balance request").Card("Hello World", "balance")
 		return
 	}
