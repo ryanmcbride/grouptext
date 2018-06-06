@@ -60,7 +60,19 @@ func main() {
 }
 func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse) {
 	if echoReq.Request.Intent.Name == "balance" {
-		echoResp.OutputSpeech("Balance request").Card("Hello World", "balance")
+		echoResp.OutputSpeech("Balance request")
+		return
+	}
+	if echoReq.Request.Intent.Name == "number" {
+		echoResp.OutputSpeech("number request")
+		return
+	}
+	if echoReq.Request.Intent.Name == "networth" {
+		echoResp.OutputSpeech("net worth request")
+		return
+	}
+	if echoReq.Request.Intent.Name == "spending" {
+		echoResp.OutputSpeech("spending request").Card("Hello World", "spending")
 		return
 	}
 	echoResp.OutputSpeech("Why is Connor super cool!").Card("Hello World", "This is a test card.")
