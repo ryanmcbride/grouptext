@@ -45,10 +45,16 @@ func main() {
 	router.Run(":" + port)
 }*/
 import (
+	"net"
+	"net/http"
 	"os"
 
+	"github.com/gorilla/mux"
 	alexa "github.com/mikeflynn/go-alexa/skillserver"
+	"github.com/urfave/negroni"
 )
+
+var hostIp string
 
 func main() {
 	port := os.Getenv("PORT")
@@ -56,8 +62,42 @@ func main() {
 		port = "5000"
 		//log.Fatal("$PORT must be set")
 	}
-	alexa.Run(Applications, port)
+
+	hostIp = resolveHostIp() + ":" + port
+
+	//	alexa.Run(Applications, port)
+	router := mux.NewRouter()
+	alexa.Init(Applications, router)
+
+	fs := http.FileServer(http.Dir("images"))
+	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", fs))
+	n := negroni.Classic()
+	n.UseHandler(router)
+	n.Run(":" + port)
 }
+
+func resolveHostIp() string {
+
+	netInterfaceAddresses, err := net.InterfaceAddrs()
+
+	if err != nil {
+		return ""
+	}
+
+	for _, netInterfaceAddress := range netInterfaceAddresses {
+
+		networkIp, ok := netInterfaceAddress.(*net.IPNet)
+
+		if ok && !networkIp.IP.IsLoopback() && networkIp.IP.To4() != nil {
+
+			ip := networkIp.IP.String()
+
+			return ip
+		}
+	}
+	return ""
+}
+
 func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse) {
 	if echoReq.Request.Intent.Name == "balance" {
 		echoResp.OutputSpeech("Balance request")
@@ -72,8 +112,9 @@ func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse)
 		return
 	}
 	if echoReq.Request.Intent.Name == "spending" {
+		image := hostIp + "/images/test.png"
 		for k, v := range echoReq.Request.Intent.Slots {
-			echoResp.OutputSpeech("spending request key "+k+" name "+v.Name+" and value "+v.Value).Card("Hello World", "spending")
+			echoResp.OutputSpeech("spending request key "+k+" name "+v.Name+" and value "+v.Value).StandardCard("Hello World", "spending", image, image)
 		}
 		if len(echoReq.Request.Intent.Slots) > 0 {
 			return
