@@ -112,7 +112,7 @@ func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse)
 		return
 	}
 	if echoReq.Request.Intent.Name == "spending" {
-		image := hostIp + "/images/test.png"
+		image := "https://young-woodland-36328.herokuapp.com/images/test.png"
 		for k, v := range echoReq.Request.Intent.Slots {
 			echoResp.OutputSpeech("spending request key "+k+" name "+v.Name+" and value "+v.Value).StandardCard("Hello World", "spending", image, image)
 		}
